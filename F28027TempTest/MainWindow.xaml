@@ -1,0 +1,114 @@
+﻿<Window x:Class="F28027TempTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:F28027TempTest"
+        mc:Ignorable="d"
+        Title="ArhinModbusStatistic" Height="450" Width="800">
+    <Grid>
+        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TabItem Header="Testing">
+                <Grid ToolTip="Receive" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid HorizontalAlignment="Stretch" Height="43" VerticalAlignment="Top">
+                        <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
+                        <Button Name="clearReceiveButton" Content="Clear" HorizontalAlignment="Left" Margin="10,10,0,10" VerticalAlignment="Stretch" Width="75" Click="clearTestTextLogeButton_Click"/>
+                        <CheckBox Name="receiveAutoscrollCheckBox" Content="AutoScroll" HorizontalAlignment="Left" Margin="90,15,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                    </Grid>
+                    <TextBox Name="testTextLog" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,47,0,81" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" MinWidth="0" IsReadOnly="True" TextChanged="receiveTextLog_TextChanged"/>
+                    <Grid HorizontalAlignment="Stretch" Height="76" VerticalAlignment="Bottom">
+                        <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
+                        <TextBox Name="transmitTextBox" Text="test" HorizontalAlignment="Stretch" Height="28" Margin="10,38,173,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" />
+                        <CheckBox Name="transmitPlusCrCheckBox" Content="+CR" HorizontalAlignment="Right" Margin="0,45,125,0" VerticalAlignment="Top" RenderTransformOrigin="-0.121,0.028"/>
+                        <CheckBox Name="transmitPlusCrcCheckBox" Content="+CRC" HorizontalAlignment="Right" Margin="0,15,118,0" VerticalAlignment="Top" RenderTransformOrigin="-0.121,0.028"/>
+                        <Button Name="sendTransmitButton" Content="Send" HorizontalAlignment="Right" Margin="0,38,10,0" VerticalAlignment="Top" Width="86" Height="28" Click="sendTransmitButton_Click"/>
+                        <Button Name="testModbusButton" Content="TESTTT" HorizontalAlignment="Right" Margin="0,5,10,0" VerticalAlignment="Top" Width="86" Height="28" Click="testModbusButton_Click"/>
+                        <RadioButton Tag="HEX" GroupName="sendformat" Content="HEX" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Checked="RadioButton_sendfilter_Checked"/>
+                        <RadioButton Tag="ASCII" GroupName="sendformat" Content="ASCII" HorizontalAlignment="Left" Margin="56,15,0,0" VerticalAlignment="Top" Checked="RadioButton_sendfilter_Checked" IsChecked="True"/>
+                    </Grid>
+
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Monitors" >
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0">
+                    <Grid HorizontalAlignment="Stretch" Height="78" VerticalAlignment="Top" >
+                        <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
+                        <Button Content="Start" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="145" Height="29"/>
+                        <Grid HorizontalAlignment="Left" Height="24" Margin="10,44,0,0" VerticalAlignment="Top" Width="145">
+                            <TextBox HorizontalAlignment="Left" Height="20" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="49" Margin="56,4,0,0"/>
+                            <Label Content="Timeout" HorizontalAlignment="Left" VerticalAlignment="Top" Width="56"/>
+                            <Label Content="ms" HorizontalAlignment="Left" VerticalAlignment="Top" Width="56" Margin="105,0,-16,0"/>
+                        </Grid>
+
+                    </Grid>
+                    <Grid HorizontalAlignment="Stretch" Margin="0,83,0,0" VerticalAlignment="Stretch">
+                        <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid HorizontalAlignment="Stretch" UseLayoutRounding="True" ShowGridLines="True" ScrollViewer.CanContentScroll="True">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="200*" MinHeight="200"/>
+                                    <RowDefinition Height="200*" MinHeight="200"/>
+                                    <RowDefinition Height="200*" MinHeight="200"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50*"/>
+                                    <ColumnDefinition Width="50*"/>
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Settings" IsSelected="True">
+                <Grid HorizontalAlignment="Stretch" Height="137" Margin="10,0,10,0" VerticalAlignment="Top">
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="114">
+                        <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
+                        <Label Content="COM port" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        <ComboBox Name="comSelectBox" HorizontalAlignment="Right" Margin="0,31,10,0" VerticalAlignment="Top" Width="94" Initialized="COM_Init" SelectionChanged="comSelectBox_SelectionChanged"/>
+                        <Button Name="comResetButton" Content="ReScan" HorizontalAlignment="Stretch" Margin="10,58,10,0" VerticalAlignment="Top" Height="36" Click="COM_Init"/>
+                    </Grid>
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="81" Margin="119,0,0,0">
+                        <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
+                        <Label Content="Baud Rate" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        <RadioButton Tag="9600" GroupName="baudrate" Content="9600" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" IsChecked="True" Checked="RadioButton_baudrate_Checked"/>
+                        <RadioButton Tag="19200" GroupName="baudrate" Content="19200" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" Checked="RadioButton_baudrate_Checked"/>
+                        <RadioButton Tag="56000" GroupName="baudrate" Content="56000" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top" Checked="RadioButton_baudrate_Checked"/>
+                    </Grid>
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="74" Margin="205,0,0,0">
+                        <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
+                        <Label Content="Parity" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        <RadioButton Tag="None" GroupName="parity" Content="none" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" IsChecked="True" Checked="RadioButton_parity_Checked"/>
+                        <RadioButton Tag="Odd" GroupName="parity" Content="odd" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top" Checked="RadioButton_parity_Checked"/>
+                        <RadioButton Tag="Even" GroupName="parity" Content="even" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Checked="RadioButton_parity_Checked"/>
+                        <RadioButton Tag="Mark" GroupName="parity" Content="mark" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top" Checked="RadioButton_parity_Checked"/>
+                        <RadioButton Tag="Space" GroupName="parity" Content="space" HorizontalAlignment="Left" Margin="10,106,0,0" VerticalAlignment="Top" Checked="RadioButton_parity_Checked"/>
+
+                    </Grid>
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="61" Margin="284,0,0,0">
+                        <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
+                        <Label Content="Stop bits" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        <RadioButton Tag="None" GroupName="stopbits" Content="0" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" IsChecked="True" Checked="RadioButton_stopbits_Checked"/>
+                        <RadioButton Tag="One" GroupName="stopbits" Content="1" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top" Checked="RadioButton_stopbits_Checked"/>
+                        <RadioButton Tag="OnePointFive" GroupName="stopbits" Content="1.5" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Checked="RadioButton_stopbits_Checked"/>
+                        <RadioButton Tag="Two" GroupName="stopbits" Content="2" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top" Checked="RadioButton_stopbits_Checked"/>
+                    </Grid>
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="106" Margin="350,0,0,0">
+                        <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
+                        <Button Name="connectButton" Content="Connect" HorizontalAlignment="Stretch" Margin="10,10,10,0" VerticalAlignment="Top" Height="31" Click="connectButton_Click" >
+                            <Button.Background>
+                                <SolidColorBrush Color="#FF96C896"/>
+                            </Button.Background>
+                        </Button>
+                        <Button Content="Save config" HorizontalAlignment="Stretch" Margin="10,46,10,0" VerticalAlignment="Top" Height="31" IsEnabled="False"/>
+                    </Grid>
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="133" Margin="461,0,0,0">
+                        <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
+                        <Button Content="Open workspace" HorizontalAlignment="Stretch" Margin="10,10,10,0" VerticalAlignment="Top" Height="31" IsEnabled="False"/>
+                        <Button Content="Save workspace" HorizontalAlignment="Stretch" Margin="10,0,10,60" VerticalAlignment="Bottom" Height="31" IsEnabled="False"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
