@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
     </Reference>
@@ -44,9 +47,22 @@
     <Reference Include="Nito.KitchenSink.CRC, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Nito.KitchenSink.CRC.1.1.0\lib\net40-Client\Nito.KitchenSink.CRC.dll</HintPath>
     </Reference>
+    <Reference Include="Prism, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.7.2.0.1422\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.7.2.0.1422\lib\net45\Prism.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.7.2.0.1422\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -80,6 +96,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Command\Base\CommandBase.cs" />
+    <Compile Include="Command\LambdaCommand.cs" />
+    <Compile Include="Converter\RadioConverter.cs" />
+    <Compile Include="Model\SettingsModel.cs" />
+    <Compile Include="ViewModel\Base\ViewModelBase.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="View\SettingsUserControl.xaml.cs">
+      <DependentUpon>SettingsUserControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -92,70 +117,74 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\SettingsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NModbus4\Data\DataStore.cs" />
-    <Compile Include="NModbus4\Data\DataStoreEventArgs.cs" />
-    <Compile Include="NModbus4\Data\DataStoreFactory.cs" />
-    <Compile Include="NModbus4\Data\DiscreteCollection.cs" />
-    <Compile Include="NModbus4\Data\IModbusMessageDataCollection.cs" />
-    <Compile Include="NModbus4\Data\ModbusDataCollection.cs" />
-    <Compile Include="NModbus4\Data\ModbusDataType.cs" />
-    <Compile Include="NModbus4\Data\RegisterCollection.cs" />
-    <Compile Include="NModbus4\Device\IModbusMaster.cs" />
-    <Compile Include="NModbus4\Device\IModbusSerialMaster.cs" />
-    <Compile Include="NModbus4\Device\ModbusDevice.cs" />
-    <Compile Include="NModbus4\Device\ModbusIpMaster.cs" />
-    <Compile Include="NModbus4\Device\ModbusMaster.cs" />
-    <Compile Include="NModbus4\Device\ModbusMasterTcpConnection.cs" />
-    <Compile Include="NModbus4\Device\ModbusSerialMaster.cs" />
-    <Compile Include="NModbus4\Device\ModbusSerialSlave.cs" />
-    <Compile Include="NModbus4\Device\ModbusSlave.cs" />
-    <Compile Include="NModbus4\Device\ModbusSlaveRequestEventArgs.cs" />
-    <Compile Include="NModbus4\Device\ModbusTcpSlave.cs" />
-    <Compile Include="NModbus4\Device\ModbusUdpSlave.cs" />
-    <Compile Include="NModbus4\Device\TcpConnectionEventArgs.cs" />
-    <Compile Include="NModbus4\Extensions\Enron\EnronModbus.cs" />
-    <Compile Include="NModbus4\GlobalSuppressions.cs" />
-    <Compile Include="NModbus4\InvalidModbusRequestException.cs" />
-    <Compile Include="NModbus4\IO\EmptyTransport.cs" />
-    <Compile Include="NModbus4\IO\IStreamResource.cs" />
-    <Compile Include="NModbus4\IO\ModbusAsciiTransport.cs" />
-    <Compile Include="NModbus4\IO\ModbusIpTransport.cs" />
-    <Compile Include="NModbus4\IO\ModbusRtuTransport.cs" />
-    <Compile Include="NModbus4\IO\ModbusSerialTransport.cs" />
-    <Compile Include="NModbus4\IO\ModbusTransport.cs" />
-    <Compile Include="NModbus4\IO\StreamResourceUtility.cs" />
-    <Compile Include="NModbus4\IO\TcpClientAdapter.cs" />
-    <Compile Include="NModbus4\IO\UdpClientAdapter.cs" />
-    <Compile Include="NModbus4\Message\AbstractModbusMessage.cs" />
-    <Compile Include="NModbus4\Message\AbstractModbusMessageWithData.cs" />
-    <Compile Include="NModbus4\Message\DiagnosticsRequestResponse.cs" />
-    <Compile Include="NModbus4\Message\IModbusMessage.cs" />
-    <Compile Include="NModbus4\Message\IModbusRequest.cs" />
-    <Compile Include="NModbus4\Message\ModbusMessageFactory.cs" />
-    <Compile Include="NModbus4\Message\ModbusMessageImpl.cs" />
-    <Compile Include="NModbus4\Message\ReadCoilsInputsRequest.cs" />
-    <Compile Include="NModbus4\Message\ReadCoilsInputsResponse.cs" />
-    <Compile Include="NModbus4\Message\ReadHoldingInputRegistersRequest.cs" />
-    <Compile Include="NModbus4\Message\ReadHoldingInputRegistersResponse.cs" />
-    <Compile Include="NModbus4\Message\ReadWriteMultipleRegistersRequest.cs" />
-    <Compile Include="NModbus4\Message\SlaveExceptionResponse.cs" />
-    <Compile Include="NModbus4\Message\WriteMultipleCoilsRequest.cs" />
-    <Compile Include="NModbus4\Message\WriteMultipleCoilsResponse.cs" />
-    <Compile Include="NModbus4\Message\WriteMultipleRegistersRequest.cs" />
-    <Compile Include="NModbus4\Message\WriteMultipleRegistersResponse.cs" />
-    <Compile Include="NModbus4\Message\WriteSingleCoilRequestResponse.cs" />
-    <Compile Include="NModbus4\Message\WriteSingleRegisterRequestResponse.cs" />
-    <Compile Include="NModbus4\Modbus.cs" />
-    <Compile Include="NModbus4.Serial\Properties\AssemblyInfo.cs" />
-    <Compile Include="NModbus4.Serial\SerialPortAdapter.cs" />
-    <Compile Include="NModbus4\Resources.cs" />
-    <Compile Include="NModbus4\SlaveException.cs" />
-    <Compile Include="NModbus4\Unme.Common\DisposableUtility.cs" />
-    <Compile Include="NModbus4\Unme.Common\SequenceUtility.cs" />
-    <Compile Include="NModbus4\Utility\DiscriminatedUnion.cs" />
-    <Compile Include="NModbus4\Utility\ModbusUtility.cs" />
+    <Compile Include="Model\NModbus4\Data\DataStore.cs" />
+    <Compile Include="Model\NModbus4\Data\DataStoreEventArgs.cs" />
+    <Compile Include="Model\NModbus4\Data\DataStoreFactory.cs" />
+    <Compile Include="Model\NModbus4\Data\DiscreteCollection.cs" />
+    <Compile Include="Model\NModbus4\Data\IModbusMessageDataCollection.cs" />
+    <Compile Include="Model\NModbus4\Data\ModbusDataCollection.cs" />
+    <Compile Include="Model\NModbus4\Data\ModbusDataType.cs" />
+    <Compile Include="Model\NModbus4\Data\RegisterCollection.cs" />
+    <Compile Include="Model\NModbus4\Device\IModbusMaster.cs" />
+    <Compile Include="Model\NModbus4\Device\IModbusSerialMaster.cs" />
+    <Compile Include="Model\NModbus4\Device\ModbusDevice.cs" />
+    <Compile Include="Model\NModbus4\Device\ModbusIpMaster.cs" />
+    <Compile Include="Model\NModbus4\Device\ModbusMaster.cs" />
+    <Compile Include="Model\NModbus4\Device\ModbusMasterTcpConnection.cs" />
+    <Compile Include="Model\NModbus4\Device\ModbusSerialMaster.cs" />
+    <Compile Include="Model\NModbus4\Device\ModbusSerialSlave.cs" />
+    <Compile Include="Model\NModbus4\Device\ModbusSlave.cs" />
+    <Compile Include="Model\NModbus4\Device\ModbusSlaveRequestEventArgs.cs" />
+    <Compile Include="Model\NModbus4\Device\ModbusTcpSlave.cs" />
+    <Compile Include="Model\NModbus4\Device\ModbusUdpSlave.cs" />
+    <Compile Include="Model\NModbus4\Device\TcpConnectionEventArgs.cs" />
+    <Compile Include="Model\NModbus4\Extensions\Enron\EnronModbus.cs" />
+    <Compile Include="Model\NModbus4\GlobalSuppressions.cs" />
+    <Compile Include="Model\NModbus4\InvalidModbusRequestException.cs" />
+    <Compile Include="Model\NModbus4\IO\EmptyTransport.cs" />
+    <Compile Include="Model\NModbus4\IO\IStreamResource.cs" />
+    <Compile Include="Model\NModbus4\IO\ModbusAsciiTransport.cs" />
+    <Compile Include="Model\NModbus4\IO\ModbusIpTransport.cs" />
+    <Compile Include="Model\NModbus4\IO\ModbusRtuTransport.cs" />
+    <Compile Include="Model\NModbus4\IO\ModbusSerialTransport.cs" />
+    <Compile Include="Model\NModbus4\IO\ModbusTransport.cs" />
+    <Compile Include="Model\NModbus4\IO\StreamResourceUtility.cs" />
+    <Compile Include="Model\NModbus4\IO\TcpClientAdapter.cs" />
+    <Compile Include="Model\NModbus4\IO\UdpClientAdapter.cs" />
+    <Compile Include="Model\NModbus4\Message\AbstractModbusMessage.cs" />
+    <Compile Include="Model\NModbus4\Message\AbstractModbusMessageWithData.cs" />
+    <Compile Include="Model\NModbus4\Message\DiagnosticsRequestResponse.cs" />
+    <Compile Include="Model\NModbus4\Message\IModbusMessage.cs" />
+    <Compile Include="Model\NModbus4\Message\IModbusRequest.cs" />
+    <Compile Include="Model\NModbus4\Message\ModbusMessageFactory.cs" />
+    <Compile Include="Model\NModbus4\Message\ModbusMessageImpl.cs" />
+    <Compile Include="Model\NModbus4\Message\ReadCoilsInputsRequest.cs" />
+    <Compile Include="Model\NModbus4\Message\ReadCoilsInputsResponse.cs" />
+    <Compile Include="Model\NModbus4\Message\ReadHoldingInputRegistersRequest.cs" />
+    <Compile Include="Model\NModbus4\Message\ReadHoldingInputRegistersResponse.cs" />
+    <Compile Include="Model\NModbus4\Message\ReadWriteMultipleRegistersRequest.cs" />
+    <Compile Include="Model\NModbus4\Message\SlaveExceptionResponse.cs" />
+    <Compile Include="Model\NModbus4\Message\WriteMultipleCoilsRequest.cs" />
+    <Compile Include="Model\NModbus4\Message\WriteMultipleCoilsResponse.cs" />
+    <Compile Include="Model\NModbus4\Message\WriteMultipleRegistersRequest.cs" />
+    <Compile Include="Model\NModbus4\Message\WriteMultipleRegistersResponse.cs" />
+    <Compile Include="Model\NModbus4\Message\WriteSingleCoilRequestResponse.cs" />
+    <Compile Include="Model\NModbus4\Message\WriteSingleRegisterRequestResponse.cs" />
+    <Compile Include="Model\NModbus4\Modbus.cs" />
+    <Compile Include="Model\NModbus4.Serial\Properties\AssemblyInfo.cs" />
+    <Compile Include="Model\NModbus4.Serial\SerialPortAdapter.cs" />
+    <Compile Include="Model\NModbus4\Resources.cs" />
+    <Compile Include="Model\NModbus4\SlaveException.cs" />
+    <Compile Include="Model\NModbus4\Unme.Common\DisposableUtility.cs" />
+    <Compile Include="Model\NModbus4\Unme.Common\SequenceUtility.cs" />
+    <Compile Include="Model\NModbus4\Utility\DiscriminatedUnion.cs" />
+    <Compile Include="Model\NModbus4\Utility\ModbusUtility.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -179,5 +208,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

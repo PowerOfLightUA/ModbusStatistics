@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:F28027TempTest"
+        xmlns:sUC="clr-namespace:F28027TempTest.View"
         mc:Ignorable="d"
         Title="ArhinModbusStatistic" Height="450" Width="800">
     <Grid>
@@ -61,53 +62,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Settings" IsSelected="True">
-                <Grid HorizontalAlignment="Stretch" Height="137" Margin="10,0,10,0" VerticalAlignment="Top">
-                    <Grid HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="114">
-                        <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
-                        <Label Content="COM port" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                        <ComboBox Name="comSelectBox" HorizontalAlignment="Right" Margin="0,31,10,0" VerticalAlignment="Top" Width="94" Initialized="COM_Init" SelectionChanged="comSelectBox_SelectionChanged"/>
-                        <Button Name="comResetButton" Content="ReScan" HorizontalAlignment="Stretch" Margin="10,58,10,0" VerticalAlignment="Top" Height="36" Click="COM_Init"/>
-                    </Grid>
-                    <Grid HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="81" Margin="119,0,0,0">
-                        <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
-                        <Label Content="Baud Rate" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                        <RadioButton Tag="9600" GroupName="baudrate" Content="9600" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" IsChecked="True" Checked="RadioButton_baudrate_Checked"/>
-                        <RadioButton Tag="19200" GroupName="baudrate" Content="19200" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" Checked="RadioButton_baudrate_Checked"/>
-                        <RadioButton Tag="56000" GroupName="baudrate" Content="56000" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top" Checked="RadioButton_baudrate_Checked"/>
-                    </Grid>
-                    <Grid HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="74" Margin="205,0,0,0">
-                        <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
-                        <Label Content="Parity" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                        <RadioButton Tag="None" GroupName="parity" Content="none" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" IsChecked="True" Checked="RadioButton_parity_Checked"/>
-                        <RadioButton Tag="Odd" GroupName="parity" Content="odd" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top" Checked="RadioButton_parity_Checked"/>
-                        <RadioButton Tag="Even" GroupName="parity" Content="even" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Checked="RadioButton_parity_Checked"/>
-                        <RadioButton Tag="Mark" GroupName="parity" Content="mark" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top" Checked="RadioButton_parity_Checked"/>
-                        <RadioButton Tag="Space" GroupName="parity" Content="space" HorizontalAlignment="Left" Margin="10,106,0,0" VerticalAlignment="Top" Checked="RadioButton_parity_Checked"/>
-
-                    </Grid>
-                    <Grid HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="61" Margin="284,0,0,0">
-                        <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
-                        <Label Content="Stop bits" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                        <RadioButton Tag="None" GroupName="stopbits" Content="0" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" IsChecked="True" Checked="RadioButton_stopbits_Checked"/>
-                        <RadioButton Tag="One" GroupName="stopbits" Content="1" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top" Checked="RadioButton_stopbits_Checked"/>
-                        <RadioButton Tag="OnePointFive" GroupName="stopbits" Content="1.5" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Checked="RadioButton_stopbits_Checked"/>
-                        <RadioButton Tag="Two" GroupName="stopbits" Content="2" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top" Checked="RadioButton_stopbits_Checked"/>
-                    </Grid>
-                    <Grid HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="106" Margin="350,0,0,0">
-                        <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
-                        <Button Name="connectButton" Content="Connect" HorizontalAlignment="Stretch" Margin="10,10,10,0" VerticalAlignment="Top" Height="31" Click="connectButton_Click" >
-                            <Button.Background>
-                                <SolidColorBrush Color="#FF96C896"/>
-                            </Button.Background>
-                        </Button>
-                        <Button Content="Save config" HorizontalAlignment="Stretch" Margin="10,46,10,0" VerticalAlignment="Top" Height="31" IsEnabled="False"/>
-                    </Grid>
-                    <Grid HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="133" Margin="461,0,0,0">
-                        <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
-                        <Button Content="Open workspace" HorizontalAlignment="Stretch" Margin="10,10,10,0" VerticalAlignment="Top" Height="31" IsEnabled="False"/>
-                        <Button Content="Save workspace" HorizontalAlignment="Stretch" Margin="10,0,10,60" VerticalAlignment="Bottom" Height="31" IsEnabled="False"/>
-                    </Grid>
-                </Grid>
+                <sUC:SettingsUserControl></sUC:SettingsUserControl>
             </TabItem>
         </TabControl>
     </Grid>
