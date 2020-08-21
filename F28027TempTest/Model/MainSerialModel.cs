@@ -10,9 +10,9 @@ using System.Windows;
 
 namespace F28027TempTest
 {
-    class SettingsModel
+    class MainSerialModel
     {
-        private static SettingsModel instance;
+        private static MainSerialModel instance;
 
         private static object syncRoot = new Object();
 
@@ -31,19 +31,19 @@ namespace F28027TempTest
         public StopBits StopBits { get; set; }
 
 
-        protected SettingsModel()
+        protected MainSerialModel()
         {
 
         }
 
-        public static SettingsModel getInstance()
+        public static MainSerialModel getInstance()
         {
             if (instance == null)
             {
                 lock (syncRoot)
                 {
                     if (instance == null)
-                        instance = new SettingsModel();
+                        instance = new MainSerialModel();
                 }
             }
             return instance;

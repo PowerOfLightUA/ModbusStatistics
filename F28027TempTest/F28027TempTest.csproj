@@ -100,9 +100,9 @@
     <Compile Include="Command\LambdaCommand.cs" />
     <Compile Include="Converter\RadioIntConverter.cs" />
     <Compile Include="Converter\RadioStringConverter.cs" />
-    <Compile Include="Model\SettingsModel.cs" />
+    <Compile Include="Model\MainSerialModel.cs" />
     <Compile Include="ViewModel\Base\ViewModelBase.cs" />
-    <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="ViewModel\MainSerialViewModel.cs" />
     <Compile Include="View\SettingsUserControl.xaml.cs">
       <DependentUpon>SettingsUserControl.xaml</DependentUpon>
     </Compile>

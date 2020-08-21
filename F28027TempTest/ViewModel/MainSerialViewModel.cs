@@ -12,8 +12,10 @@ using System.Windows.Input;
 
 namespace F28027TempTest.ViewModel
 {
-    class SettingsViewModel : ViewModelBase
+    class MainSerialViewModel : ViewModelBase
     {
+        private MainSerialModel msm;
+
         #region Variables
         public ObservableCollection<string> ComPortsList
         {
@@ -23,25 +25,25 @@ namespace F28027TempTest.ViewModel
 
         public string ComPort
         {
-            get => SettingsModel.getInstance().ComPort;
+            get => msm.ComPort;
             set
             {
-                SettingsModel.getInstance().ComPort = value;
+                msm.ComPort = value;
                 RaisePropertyChanged();
             }
         }
 
         public bool IsConnected
         {
-            get => SettingsModel.getInstance().IsConnected;
+            get => msm.IsConnected;
         }
 
         public uint BaudRate
         {
-            get => SettingsModel.getInstance().BaudRate;
+            get => msm.BaudRate;
             set
             {
-                SettingsModel.getInstance().BaudRate = value;
+                msm.BaudRate = value;
                 RaisePropertyChanged();
             }
 
@@ -49,10 +51,10 @@ namespace F28027TempTest.ViewModel
 
         public string Parity
         {
-            get => SettingsModel.getInstance().Parity.ToString();
+            get => msm.Parity.ToString();
             set
             {
-                SettingsModel.getInstance().Parity = (Parity)Enum.Parse(typeof(Parity), value);
+                msm.Parity = (Parity)Enum.Parse(typeof(Parity), value);
                 RaisePropertyChanged("Parity");
             }
 
@@ -60,10 +62,10 @@ namespace F28027TempTest.ViewModel
 
         public string StopBits
         {
-            get => SettingsModel.getInstance().StopBits.ToString();
+            get => msm.StopBits.ToString();
             set
             {
-                SettingsModel.getInstance().StopBits = (StopBits)Enum.Parse(typeof(StopBits), value);
+                msm.StopBits = (StopBits)Enum.Parse(typeof(StopBits), value);
                 RaisePropertyChanged("StopBits");
             }
 
@@ -87,16 +89,16 @@ namespace F28027TempTest.ViewModel
         #region ConnectDisconnectSerialCommand
 
         public ICommand ConnectDisconnectSerialCommand { get; }
-        private bool CanConnectDisconnectSerialCommandExecute(object p) => ((SettingsModel.getInstance().ComPort != null && SettingsModel.getInstance().BaudRate != 0) || SettingsModel.getInstance().IsConnected);
+        private bool CanConnectDisconnectSerialCommandExecute(object p) => ((msm.ComPort != null && msm.BaudRate != 0) || msm.IsConnected);
         private void OnConnectDisconnectSerialCommandExecuted(object p)
         {
-            if (!SettingsModel.getInstance().IsConnected)
+            if (!msm.IsConnected)
             {
-                SettingsModel.getInstance().Connect();
+                msm.Connect();
             }
             else
             {
-                SettingsModel.getInstance().Disconnect();
+                msm.Disconnect();
             }
             RaisePropertyChanged("IsConnected");
         }
@@ -105,17 +107,19 @@ namespace F28027TempTest.ViewModel
 
         #endregion
 
-        public SettingsViewModel()
+        public MainSerialViewModel()
         {
+            SettingsInit();
+
             RefreshComPortsListCommand = new LambdaCommand(OnRefreshComPortsListCommandExecuted, CanRefreshComPortsListCommandExecute);
 
             ConnectDisconnectSerialCommand = new LambdaCommand(OnConnectDisconnectSerialCommandExecuted, CanConnectDisconnectSerialCommandExecute);
-
-            SettingsInit();
         }
 
         private void SettingsInit()
         {
+            msm = MainSerialModel.getInstance();
+
             BaudRate = 9600;
             Parity = "None";
             StopBits = "One";

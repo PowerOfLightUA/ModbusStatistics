@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
-        <settvm:SettingsViewModel/>
+        <settvm:MainSerialViewModel/>
     </UserControl.DataContext>
     <UserControl.Resources>
         <conv:RadioIntConverter x:Key="RadioIntConverter" />
