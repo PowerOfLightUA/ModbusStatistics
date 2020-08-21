@@ -41,25 +41,25 @@ namespace F28027TempTest
             this.baudRate = int.Parse(((RadioButton)sender).Tag.ToString());
         }
 
-        private void COM_Init(object sender, EventArgs e)
-        {
-            string[] ports = SerialPort.GetPortNames();
-            comSelectBox.Items.Clear();
-            foreach (string port in ports)
-            {
-                comSelectBox.Items.Add(port);
-            }
-            comSelectBox.SelectedIndex = 0;
-        }
+        //private void COM_Init(object sender, EventArgs e)
+        //{
+        //    string[] ports = SerialPort.GetPortNames();
+        //    comSelectBox.Items.Clear();
+        //    foreach (string port in ports)
+        //    {
+        //        comSelectBox.Items.Add(port);
+        //    }
+        //    comSelectBox.SelectedIndex = 0;
+        //}
 
-        private void comSelectBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (comSelectBox.SelectedItem != null)
-            {
-                this.comPort = comSelectBox.SelectedItem.ToString();
-            }
+        //private void comSelectBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    if (comSelectBox.SelectedItem != null)
+        //    {
+        //        this.comPort = comSelectBox.SelectedItem.ToString();
+        //    }
 
-        }
+        //}
 
         private void connectButton_Click(object sender, RoutedEventArgs e)
         {
