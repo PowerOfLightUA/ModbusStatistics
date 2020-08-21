@@ -46,6 +46,28 @@ namespace F28027TempTest.ViewModel
 
         }
 
+        public string Parity
+        {
+            get => SettingsModel.getInstance().Parity.ToString();
+            set
+            {
+                SettingsModel.getInstance().Parity = (Parity)Enum.Parse(typeof(Parity), value);
+                RaisePropertyChanged("Parity");
+            }
+
+        }
+
+        public string StopBits
+        {
+            get => SettingsModel.getInstance().StopBits.ToString();
+            set
+            {
+                SettingsModel.getInstance().StopBits = (StopBits)Enum.Parse(typeof(StopBits), value);
+                RaisePropertyChanged("StopBits");
+            }
+
+        }
+
         #endregion
 
         #region Commands
@@ -55,46 +77,8 @@ namespace F28027TempTest.ViewModel
         private bool CanRefreshComPortsListCommandExecute(object p) => true;
         private void OnRefreshComPortsListCommandExecuted(object p)
         {
-            ComPortsList = new ObservableCollection<string>(SerialPort.GetPortNames());
-            RaisePropertyChanged("ComPortsList");
+            RefreshComPortsList();
         }
-        #endregion
-
-        #region SelectBaudRateCommand
-        public ICommand SelectBaudRateCommand { get; }
-        private bool CanSelectBaudRateCommandExecute(object p) => true;
-        private void OnSelectBaudRateCommandExecuted(object p)
-        {
-            if (int.TryParse((string)p, out int i))
-            {
-                SettingsModel.getInstance().BaudRate = (uint)i;
-                RaisePropertyChanged("BaudRate");
-            }
-        }
-        #endregion
-
-        #region SelectParityCommand
-
-        public ICommand SelectParityCommand { get; }
-        private bool CanSelectParityCommandExecute(object p) => true;
-        private void OnSelectParityCommandExecuted(object p)
-        {
-            SettingsModel.getInstance().Parity = (Parity)Enum.Parse(typeof(Parity), (string)p);
-            RaisePropertyChanged("Parity");
-        }
-
-        #endregion
-
-        #region SelectStopBitsCommand
-
-        public ICommand SelectStopBitsCommand { get; }
-        private bool CanSelectStopBitsCommandExecute(object p) => true;
-        private void OnSelectStopBitsCommandExecuted(object p)
-        {
-            SettingsModel.getInstance().StopBits = (StopBits)Enum.Parse(typeof(StopBits), (string)p);
-            RaisePropertyChanged("StopBits");
-        }
-
         #endregion
 
         #region ConnectDisconnectSerialCommand
@@ -121,13 +105,26 @@ namespace F28027TempTest.ViewModel
         public SettingsViewModel()
         {
             RefreshComPortsListCommand = new LambdaCommand(OnRefreshComPortsListCommandExecuted, CanRefreshComPortsListCommandExecute);
-            SelectBaudRateCommand = new LambdaCommand(OnSelectBaudRateCommandExecuted, CanSelectBaudRateCommandExecute);
-            SelectParityCommand = new LambdaCommand(OnSelectParityCommandExecuted, CanSelectParityCommandExecute);
-            SelectStopBitsCommand = new LambdaCommand(OnSelectStopBitsCommandExecuted, CanSelectStopBitsCommandExecute);
-
-
 
             ConnectDisconnectSerialCommand = new LambdaCommand(OnConnectDisconnectSerialCommandExecuted, CanConnectDisconnectSerialCommandExecute);
+
+            SettingsInit();
+        }
+
+        private void SettingsInit()
+        {
+            BaudRate = 9600;
+            Parity = "None";
+            StopBits = "One";
+
+            RefreshComPortsList();
+            ComPort = ComPortsList.Count>0? ComPortsList[0]:null;
+        }
+
+        private void RefreshComPortsList()
+        {
+            ComPortsList = new ObservableCollection<string>(SerialPort.GetPortNames());
+            RaisePropertyChanged("ComPortsList");
         }
     }
 }

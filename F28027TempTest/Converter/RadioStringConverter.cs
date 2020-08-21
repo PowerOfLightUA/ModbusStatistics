@@ -9,18 +9,18 @@ using System.Windows.Markup;
 
 namespace F28027TempTest.Converter
 {
-    public class RadioConverter : IValueConverter
+    class RadioStringConverter: IValueConverter
     {
         #region IValueConverter
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value.Equals(parameter);
+            return ((string)value).Equals((string)parameter);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return System.Convert.ToBoolean(value) ? parameter : null;
+            return System.Convert.ToBoolean(value) ? (string)parameter : null;
         }
 
         #endregion

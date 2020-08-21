@@ -98,7 +98,8 @@
     </ApplicationDefinition>
     <Compile Include="Command\Base\CommandBase.cs" />
     <Compile Include="Command\LambdaCommand.cs" />
-    <Compile Include="Converter\RadioConverter.cs" />
+    <Compile Include="Converter\RadioIntConverter.cs" />
+    <Compile Include="Converter\RadioStringConverter.cs" />
     <Compile Include="Model\SettingsModel.cs" />
     <Compile Include="ViewModel\Base\ViewModelBase.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />

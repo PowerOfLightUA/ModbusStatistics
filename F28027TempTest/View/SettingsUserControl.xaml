@@ -12,7 +12,8 @@
         <settvm:SettingsViewModel/>
     </UserControl.DataContext>
     <UserControl.Resources>
-        <conv:RadioConverter x:Key="RadioConverter" />
+        <conv:RadioIntConverter x:Key="RadioIntConverter" />
+        <conv:RadioStringConverter x:Key="RadioStringConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid HorizontalAlignment="Stretch" Height="137" Margin="10,0,10,0" VerticalAlignment="Top">
@@ -26,36 +27,62 @@
                 <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
                 <Label Content="Baud Rate" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <RadioButton GroupName="baudrate" Content="9600" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" 
-                             IsChecked="{Binding Path=BaudRate, ConverterParameter=9600, Converter={StaticResource RadioConverter}, Mode=TwoWay}"/>
+                             IsChecked="{Binding Path=BaudRate, ConverterParameter=9600, Converter={StaticResource RadioIntConverter}, Mode=TwoWay}"/>
                 <RadioButton GroupName="baudrate" Content="19200" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" 
-                             IsChecked="{Binding Path=BaudRate, ConverterParameter=19200, Converter={StaticResource RadioConverter}, Mode=TwoWay}"/>
+                             IsChecked="{Binding Path=BaudRate, ConverterParameter=19200, Converter={StaticResource RadioIntConverter}, Mode=TwoWay}"/>
                 <RadioButton GroupName="baudrate" Content="56000" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top" 
-                             IsChecked="{Binding Path=BaudRate, ConverterParameter=56000, Converter={StaticResource RadioConverter}, Mode=TwoWay}"/>
+                             IsChecked="{Binding Path=BaudRate, ConverterParameter=56000, Converter={StaticResource RadioIntConverter}, Mode=TwoWay}"/>
             </Grid>
             <Grid HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="74" Margin="205,0,0,0">
                 <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
                 <Label Content="Parity" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <RadioButton GroupName="parity" Content="none" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Command="{Binding Path=SelectParityCommand}" CommandParameter="None"/>
-                <RadioButton GroupName="parity" Content="odd" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top" Command="{Binding Path=SelectParityCommand}" CommandParameter="Odd"/>
-                <RadioButton GroupName="parity" Content="even" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Command="{Binding Path=SelectParityCommand}" CommandParameter="Even"/>
-                <RadioButton GroupName="parity" Content="mark" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top" Command="{Binding Path=SelectParityCommand}" CommandParameter="Mark"/>
-                <RadioButton GroupName="parity" Content="space" HorizontalAlignment="Left" Margin="10,106,0,0" VerticalAlignment="Top" Command="{Binding Path=SelectParityCommand}" CommandParameter="Space"/>
+                <RadioButton GroupName="parity" Content="none" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top"
+                             IsChecked="{Binding Path=Parity, ConverterParameter=None, Converter={StaticResource RadioStringConverter}, Mode=TwoWay}"/>
+                <RadioButton GroupName="parity" Content="odd" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top"
+                             IsChecked="{Binding Path=Parity, ConverterParameter=Odd, Converter={StaticResource RadioStringConverter}, Mode=TwoWay}"/>
+                <RadioButton GroupName="parity" Content="even" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top"
+                             IsChecked="{Binding Path=Parity, ConverterParameter=Even, Converter={StaticResource RadioStringConverter}, Mode=TwoWay}"/>
+                <RadioButton GroupName="parity" Content="mark" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top"
+                             IsChecked="{Binding Path=Parity, ConverterParameter=Mark, Converter={StaticResource RadioStringConverter}, Mode=TwoWay}"/>
+                <RadioButton GroupName="parity" Content="space" HorizontalAlignment="Left" Margin="10,106,0,0" VerticalAlignment="Top"
+                             IsChecked="{Binding Path=Parity, ConverterParameter=Space, Converter={StaticResource RadioStringConverter}, Mode=TwoWay}"/>
 
             </Grid>
             <Grid HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="61" Margin="284,0,0,0">
                 <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
                 <Label Content="Stop bits" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <RadioButton GroupName="stopbits" Content="0" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top" Command="{Binding Path=SelectStopBitsCommand}" CommandParameter="None"/>
-                <RadioButton GroupName="stopbits" Content="1" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top" Command="{Binding Path=SelectStopBitsCommand}" CommandParameter="One"/>
-                <RadioButton GroupName="stopbits" Content="1.5" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Command="{Binding Path=SelectStopBitsCommand}" CommandParameter="OnePointFive"/>
-                <RadioButton GroupName="stopbits" Content="2" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top" Command="{Binding Path=SelectStopBitsCommand}" CommandParameter="Two"/>
+                <RadioButton GroupName="stopbits" Content="0" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top"
+                             IsChecked="{Binding Path=StopBits, ConverterParameter=None, Converter={StaticResource RadioStringConverter}, Mode=TwoWay}"/>
+                <RadioButton GroupName="stopbits" Content="1" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top"
+                             IsChecked="{Binding Path=StopBits, ConverterParameter=One, Converter={StaticResource RadioStringConverter}, Mode=TwoWay}"/>
+                <RadioButton GroupName="stopbits" Content="1.5" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top"
+                             IsChecked="{Binding Path=StopBits, ConverterParameter=OnePointFive, Converter={StaticResource RadioStringConverter}, Mode=TwoWay}"/>
+                <RadioButton GroupName="stopbits" Content="2" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top"
+                             IsChecked="{Binding Path=StopBits, ConverterParameter=Two, Converter={StaticResource RadioStringConverter}, Mode=TwoWay}"/>
             </Grid>
             <Grid HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="106" Margin="350,0,0,0">
                 <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
-                <Button Name="connectbutton" Content="Connect" HorizontalAlignment="Stretch" Margin="10,10,10,0" VerticalAlignment="Top" Height="31" Command="{Binding Path=ConnectDisconnectSerialCommand}">
-                    <Button.Background>
-                        <SolidColorBrush Color="#FF96C896"/>
-                    </Button.Background>
+                <Button Name="connectbutton" HorizontalAlignment="Stretch" Margin="10,10,10,0" VerticalAlignment="Top" Height="31" Command="{Binding Path=ConnectDisconnectSerialCommand}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Content" Value="Connect"/>
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="Green"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=IsConnected}" Value="true">
+                                    <Setter Property="Content" Value="Disconnect"/>
+                                    <Setter Property="Background">
+                                        <Setter.Value>
+                                            <SolidColorBrush Color="Red"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
                 <Button Content="Save config" HorizontalAlignment="Stretch" Margin="10,46,10,0" VerticalAlignment="Top" Height="31" IsEnabled="False"/>
             </Grid>
