@@ -15,7 +15,7 @@ namespace F28027TempTest.ViewModel
     class SettingsViewModel : ViewModelBase
     {
         #region Variables
-        public ObservableCollection<string> ComPortsList 
+        public ObservableCollection<string> ComPortsList
         {
             get;
             private set;
@@ -24,7 +24,8 @@ namespace F28027TempTest.ViewModel
         public string ComPort
         {
             get => SettingsModel.getInstance().ComPort;
-            set {
+            set
+            {
                 SettingsModel.getInstance().ComPort = value;
                 RaisePropertyChanged();
             }
@@ -78,6 +79,8 @@ namespace F28027TempTest.ViewModel
         private void OnRefreshComPortsListCommandExecuted(object p)
         {
             RefreshComPortsList();
+            RaisePropertyChanged("ComPortsList");
+            ComPort = ComPortsList.Count > 0 ? ComPortsList[0] : null;
         }
         #endregion
 
@@ -118,13 +121,12 @@ namespace F28027TempTest.ViewModel
             StopBits = "One";
 
             RefreshComPortsList();
-            ComPort = ComPortsList.Count>0? ComPortsList[0]:null;
+            ComPort = ComPortsList.Count > 0 ? ComPortsList[0] : null;
         }
 
         private void RefreshComPortsList()
         {
             ComPortsList = new ObservableCollection<string>(SerialPort.GetPortNames());
-            RaisePropertyChanged("ComPortsList");
         }
     }
 }
