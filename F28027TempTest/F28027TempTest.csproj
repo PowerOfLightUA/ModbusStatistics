@@ -101,8 +101,10 @@
     <Compile Include="Converter\RadioIntConverter.cs" />
     <Compile Include="Converter\RadioStringConverter.cs" />
     <Compile Include="Model\MainSerialModel.cs" />
+    <Compile Include="Model\SerialLog.cs" />
     <Compile Include="ViewModel\Base\ViewModelBase.cs" />
     <Compile Include="ViewModel\MainSerialViewModel.cs" />
+    <Compile Include="View\Extensions\AutoScroll.cs" />
     <Compile Include="View\SettingsUserControl.xaml.cs">
       <DependentUpon>SettingsUserControl.xaml</DependentUpon>
     </Compile>
@@ -119,6 +121,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\SettingsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TestingUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

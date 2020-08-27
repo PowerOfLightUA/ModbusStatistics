@@ -1,4 +1,5 @@
 ﻿using F28027TempTest.Command;
+using F28027TempTest.Model;
 using F28027TempTest.ViewModel.Base;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace F28027TempTest.ViewModel
 {
@@ -71,6 +73,13 @@ namespace F28027TempTest.ViewModel
 
         }
 
+        public string TestingSendText { get; set; } = "Test";
+
+        public ObservableCollection<SerialLogEntity> SerialLogs
+        {
+            get => msm.SerialLogs;
+        }
+
         #endregion
 
         #region Commands
@@ -105,6 +114,16 @@ namespace F28027TempTest.ViewModel
 
         #endregion
 
+        public ICommand TestingSendSerialCommand { get; }
+        private bool CanTestingSendSerialCommandExecute(object p) => (msm.IsConnected);
+        private void OnTestingSendSerialCommandExecuted(object p)
+        {
+            if (msm.IsConnected)
+            {
+                msm.SendBytes(ASCIIEncoding.ASCII.GetBytes(TestingSendText));
+            }
+        }
+
         #endregion
 
         public MainSerialViewModel()
@@ -114,6 +133,8 @@ namespace F28027TempTest.ViewModel
             RefreshComPortsListCommand = new LambdaCommand(OnRefreshComPortsListCommandExecuted, CanRefreshComPortsListCommandExecute);
 
             ConnectDisconnectSerialCommand = new LambdaCommand(OnConnectDisconnectSerialCommandExecuted, CanConnectDisconnectSerialCommandExecute);
+
+            TestingSendSerialCommand = new LambdaCommand(OnTestingSendSerialCommandExecuted, CanTestingSendSerialCommandExecute);
         }
 
         private void SettingsInit()

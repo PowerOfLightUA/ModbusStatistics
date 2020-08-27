@@ -10,26 +10,7 @@
     <Grid>
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <TabItem Header="Testing">
-                <Grid ToolTip="Receive" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Grid HorizontalAlignment="Stretch" Height="43" VerticalAlignment="Top">
-                        <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
-                        <Button Name="clearReceiveButton" Content="Clear" HorizontalAlignment="Left" Margin="10,10,0,10" VerticalAlignment="Stretch" Width="75" Click="clearTestTextLogeButton_Click"/>
-                        <CheckBox Name="receiveAutoscrollCheckBox" Content="AutoScroll" HorizontalAlignment="Left" Margin="90,15,0,0" VerticalAlignment="Top" IsChecked="True"/>
-                    </Grid>
-                    <TextBox Name="testTextLog" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,47,0,81" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" MinWidth="0" IsReadOnly="True" TextChanged="receiveTextLog_TextChanged"/>
-                    <Grid HorizontalAlignment="Stretch" Height="76" VerticalAlignment="Bottom">
-                        <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
-                        <TextBox Name="transmitTextBox" Text="test" HorizontalAlignment="Stretch" Height="28" Margin="10,38,173,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" />
-                        <CheckBox Name="transmitPlusCrCheckBox" Content="+CR" HorizontalAlignment="Right" Margin="0,45,125,0" VerticalAlignment="Top" RenderTransformOrigin="-0.121,0.028"/>
-                        <CheckBox Name="transmitPlusCrcCheckBox" Content="+CRC" HorizontalAlignment="Right" Margin="0,15,118,0" VerticalAlignment="Top" RenderTransformOrigin="-0.121,0.028"/>
-                        <Button Name="sendTransmitButton" Content="Send" HorizontalAlignment="Right" Margin="0,38,10,0" VerticalAlignment="Top" Width="86" Height="28" Click="sendTransmitButton_Click"/>
-                        <Button Name="testModbusButton" Content="TESTTT" HorizontalAlignment="Right" Margin="0,5,10,0" VerticalAlignment="Top" Width="86" Height="28" Click="testModbusButton_Click"/>
-                        <RadioButton Tag="HEX" GroupName="sendformat" Content="HEX" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Checked="RadioButton_sendfilter_Checked"/>
-                        <RadioButton Tag="ASCII" GroupName="sendformat" Content="ASCII" HorizontalAlignment="Left" Margin="56,15,0,0" VerticalAlignment="Top" Checked="RadioButton_sendfilter_Checked" IsChecked="True"/>
-                    </Grid>
-
-
-                </Grid>
+                <sUC:TestingUserControl></sUC:TestingUserControl>
             </TabItem>
             <TabItem Header="Monitors" >
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0">

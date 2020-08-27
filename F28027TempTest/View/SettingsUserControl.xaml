@@ -21,7 +21,8 @@
                 <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
                 <Label Content="COM port" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <ComboBox HorizontalAlignment="Right" Margin="0,31,10,0" VerticalAlignment="Top" Width="94" ItemsSource="{Binding Path=ComPortsList}" SelectedItem="{Binding Path=ComPort}"/>
-                <Button Content="ReScan" HorizontalAlignment="Stretch" Margin="10,58,10,0" VerticalAlignment="Top" Height="36" Command="{Binding Path=RefreshComPortsListCommand}"/>
+                <Button Content="ReScan" HorizontalAlignment="Stretch" Margin="10,58,10,0" VerticalAlignment="Top" Height="36" 
+                        Command="{Binding Path=RefreshComPortsListCommand}"/>
             </Grid>
             <Grid HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="81" Margin="119,0,0,0">
                 <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
