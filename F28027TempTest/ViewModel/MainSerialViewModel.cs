@@ -80,6 +80,9 @@ namespace F28027TempTest.ViewModel
             get => msm.SerialLogs;
         }
 
+        public bool TestingTextIsHex { get; set; } = false;
+        public bool TestingTextIsAscii { get; set; } = true;
+
         #endregion
 
         #region Commands

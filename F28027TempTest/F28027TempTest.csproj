@@ -108,6 +108,9 @@
     <Compile Include="View\SettingsUserControl.xaml.cs">
       <DependentUpon>SettingsUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TestingUserControl.xaml.cs">
+      <DependentUpon>TestingUserControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

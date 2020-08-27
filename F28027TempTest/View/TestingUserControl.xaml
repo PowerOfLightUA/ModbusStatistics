@@ -39,8 +39,7 @@
             </i:Interaction.Behaviors>
 
             <DataGrid Name="testingDataGrid" 
-                  AutoGenerateColumns="False" IsReadOnly="True"
-                  CanUserResizeRows="False" SourceUpdated="testingDataGrid_SourceUpdated"
+                  AutoGenerateColumns="False" IsReadOnly="True" CanUserResizeRows="False"
                   ItemsSource="{Binding Path=SerialLogs}" SelectionMode="Single" SelectionUnit="Cell">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Time" Binding="{Binding Path=Time}" 
@@ -58,11 +57,6 @@
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>
-        <!--<avalon:TextEditor Name="testTextLog" 
-                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,47,0,81" 
-                           VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" 
-                            ShowLineNumbers="True">
-        </avalon:TextEditor>-->
         <Grid HorizontalAlignment="Stretch" Height="76" VerticalAlignment="Bottom">
             <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
             <TextBox Name="transmitTextBox" Text="{Binding Path=TestingSendText}" 
@@ -71,11 +65,12 @@
             <CheckBox Name="transmitPlusCrcCheckBox" Content="+CRC" HorizontalAlignment="Right" Margin="0,15,118,0" VerticalAlignment="Top" RenderTransformOrigin="-0.121,0.028"/>
             <Button Name="sendTransmitButton" Content="Send" Command="{Binding Path=TestingSendSerialCommand}"
                     HorizontalAlignment="Right" Margin="0,38,10,0" VerticalAlignment="Top" Width="86" Height="28"/>
-            <Button Name="testModbusButton" Content="TESTTT" HorizontalAlignment="Right" Margin="0,5,10,0" VerticalAlignment="Top" Width="86" Height="28"/>
-            <RadioButton Tag="HEX" GroupName="sendformat" Content="HEX" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top"/>
-            <RadioButton Tag="ASCII" GroupName="sendformat" Content="ASCII" HorizontalAlignment="Left" Margin="56,15,0,0" VerticalAlignment="Top" IsChecked="True"/>
+            <RadioButton Tag="HEX" GroupName="sendformat" IsChecked="{Binding Path=TestingTextIsHex}"
+                         Content="HEX" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top"/>
+            <RadioButton Tag="ASCII" GroupName="sendformat" IsChecked="{Binding Path=TestingTextIsAscii}"
+                         Content="ASCII" HorizontalAlignment="Left" Margin="56,15,0,0" VerticalAlignment="Top"/>
         </Grid>
-        
+
 
 
     </Grid>
