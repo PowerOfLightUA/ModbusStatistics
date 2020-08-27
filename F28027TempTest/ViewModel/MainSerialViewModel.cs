@@ -7,7 +7,9 @@ using System.Collections.ObjectModel;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -73,15 +75,43 @@ namespace F28027TempTest.ViewModel
 
         }
 
-        public string TestingSendText { get; set; } = "Test";
-
         public ObservableCollection<SerialLogEntity> SerialLogs
         {
             get => msm.SerialLogs;
         }
 
+        #region TestingText
+        private string _TestingSendText;
+        public string TestingSendText
+        {
+            get => _TestingSendText;
+            set
+            {
+                if (TestingTextIsHex)
+                {
+                    string last = _TestingSendText;
+                    string n = StringHexFormatter.Prettify(value);
+                    if (StringHexFormatter.IsGood(n) || n == "")
+                    {
+                        _TestingSendText = n;
+                    }
+                    else
+                    {
+                        _TestingSendText = last;
+                    }
+                }
+                else
+                {
+                    _TestingSendText = value;
+                }
+            }
+        }
+
         public bool TestingTextIsHex { get; set; } = false;
         public bool TestingTextIsAscii { get; set; } = true;
+
+        
+        #endregion
 
         #endregion
 
@@ -117,15 +147,33 @@ namespace F28027TempTest.ViewModel
 
         #endregion
 
+        #region TestingSendSerialCommand
         public ICommand TestingSendSerialCommand { get; }
         private bool CanTestingSendSerialCommandExecute(object p) => (msm.IsConnected);
         private void OnTestingSendSerialCommandExecuted(object p)
         {
             if (msm.IsConnected)
             {
-                msm.SendBytes(ASCIIEncoding.ASCII.GetBytes(TestingSendText));
+                byte[] bytes = null;
+                try
+                {
+                    if (TestingTextIsAscii)
+                    {
+                        bytes = ASCIIEncoding.ASCII.GetBytes(TestingSendText);
+                    }
+                    else if (TestingTextIsHex)
+                    {
+                        bytes = StringHexFormatter.ConvertHexStringToByteArray(TestingSendText);
+                    }
+                    msm.SendBytes(bytes);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString(), "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
+        #endregion
 
         #endregion
 
