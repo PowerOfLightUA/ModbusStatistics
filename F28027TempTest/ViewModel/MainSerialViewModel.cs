@@ -13,6 +13,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using Modbus.Utility;
 
 namespace F28027TempTest.ViewModel
 {
@@ -79,6 +80,10 @@ namespace F28027TempTest.ViewModel
         {
             get => msm.SerialLogs;
         }
+
+        public bool SendPlus_CRC { get; set; } = false;
+
+        public bool SendPlus_CR { get; set; } = false;
 
         #region TestingText
         private string _TestingSendText;
@@ -165,6 +170,9 @@ namespace F28027TempTest.ViewModel
                     {
                         bytes = StringHexFormatter.ConvertHexStringToByteArray(TestingSendText);
                     }
+
+                    if(SendPlus_CR) bytes = bytes.Concat(Encoding.ASCII.GetBytes(msm.SerialObj.NewLine)).ToArray();
+                    if(SendPlus_CRC) bytes = bytes.Concat(ModbusUtility.CalculateCrc(bytes)).ToArray();
                     msm.SendBytes(bytes);
                 }
                 catch (Exception ex)

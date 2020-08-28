@@ -31,7 +31,7 @@
         <Grid HorizontalAlignment="Stretch" Height="43" VerticalAlignment="Top">
             <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
             <Button Name="clearReceiveButton" Content="Clear" HorizontalAlignment="Left" Margin="10,10,0,10" VerticalAlignment="Stretch" Width="75"/>
-            <CheckBox x:Name="TestingAutoScrollCheckBox" Content="AutoScroll" HorizontalAlignment="Left" Margin="90,15,0,0" VerticalAlignment="Top"/>
+            <CheckBox x:Name="TestingAutoScrollCheckBox" Content="AutoScroll" HorizontalAlignment="Left" Margin="90,15,0,0" VerticalAlignment="Top" IsChecked="True"/>
         </Grid>
         <ScrollViewer Margin="0,48,0,81" >
             <i:Interaction.Behaviors>
@@ -61,8 +61,10 @@
             <Rectangle Fill="#FFF4F4F5" Stroke="Black"/>
             <TextBox Name="transmitTextBox" Text="{Binding Path=TestingSendText, UpdateSourceTrigger=PropertyChanged}"
                      HorizontalAlignment="Stretch" Height="28" Margin="10,38,173,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" />
-            <CheckBox Name="transmitPlusCrCheckBox" Content="+CR" HorizontalAlignment="Right" Margin="0,45,125,0" VerticalAlignment="Top" RenderTransformOrigin="-0.121,0.028"/>
-            <CheckBox Name="transmitPlusCrcCheckBox" Content="+CRC" HorizontalAlignment="Right" Margin="0,15,118,0" VerticalAlignment="Top" RenderTransformOrigin="-0.121,0.028"/>
+            <CheckBox Name="transmitPlusCrCheckBox" Content="+CR" IsChecked="{Binding Path=SendPlus_CR}"
+                      HorizontalAlignment="Right" Margin="0,45,125,0" VerticalAlignment="Top" RenderTransformOrigin="-0.121,0.028"/>
+            <CheckBox Name="transmitPlusCrcCheckBox" Content="+CRC" IsChecked="{Binding Path=SendPlus_CRC}"
+                      HorizontalAlignment="Right" Margin="0,15,118,0" VerticalAlignment="Top" RenderTransformOrigin="-0.121,0.028"/>
             <Button Name="sendTransmitButton" Content="Send" Command="{Binding Path=TestingSendSerialCommand}"
                     HorizontalAlignment="Right" Margin="0,38,10,0" VerticalAlignment="Top" Width="86" Height="28"/>
             <RadioButton Tag="HEX" GroupName="sendformat" IsChecked="{Binding Path=TestingTextIsHex}"
