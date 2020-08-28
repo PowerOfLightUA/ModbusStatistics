@@ -33,6 +33,11 @@
             <Button Name="clearReceiveButton" Content="Clear" Command="{Binding ClearTestingLog}"
                     HorizontalAlignment="Left" Margin="10,10,0,10" VerticalAlignment="Stretch" Width="75"/>
             <CheckBox x:Name="TestingAutoScrollCheckBox" Content="AutoScroll" HorizontalAlignment="Left" Margin="90,15,0,0" VerticalAlignment="Top" IsChecked="True"/>
+            <Grid Margin="170,13,451,12">
+                <Label Content="ReceiveSplitTimeMs" Margin="0,-4,0,-7"/>
+                <TextBox PreviewTextInput="TextBox_PreviewTextInput"  Text="{Binding ReceiveSplitTimeMs}" Margin="114,0,0,0"/>
+            </Grid>
+            
         </Grid>
         <ScrollViewer Margin="0,48,0,81" >
             <i:Interaction.Behaviors>
@@ -40,13 +45,14 @@
             </i:Interaction.Behaviors>
 
             <DataGrid Name="testingDataGrid" 
-                  AutoGenerateColumns="False" IsReadOnly="True" CanUserResizeRows="False"
+                  AutoGenerateColumns="False" IsReadOnly="True" CanUserResizeRows="False" FrozenColumnCount="1"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible"
                   ItemsSource="{Binding Path=SerialLogs}" SelectionMode="Single" SelectionUnit="Cell">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Time" Binding="{Binding Path=Time}" 
                                         HeaderStyle="{StaticResource CenterAlignmentColumnHeaderStyle}" 
                                         Width="auto"/>
-                    <DataGridTextColumn Header="Operation" Binding="{Binding Path=Text}" 
+                    <DataGridTextColumn Header="Operation" Binding="{Binding Path=Type}" 
                                         HeaderStyle="{StaticResource CenterAlignmentColumnHeaderStyle}" 
                                         Width="auto"/>
                     <DataGridTextColumn Header="ASCII" Binding="{Binding Path=Text}" 

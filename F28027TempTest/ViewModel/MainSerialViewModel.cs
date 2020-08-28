@@ -76,6 +76,12 @@ namespace F28027TempTest.ViewModel
 
         }
 
+        public int ReceiveSplitTimeMs
+        {
+            get => msm.ReceiveSplitTimeMs;
+            set => msm.ReceiveSplitTimeMs = value;
+        }
+
         public ObservableCollection<SerialLogEntity> SerialLogs
         {
             get => msm.SerialLogs;

@@ -68,13 +68,15 @@ namespace F28027TempTest.View.Extensions
 
         private void OnCollectionChanged(object sender, EventArgs args)
         {
-            if (AutoScroll)
+            App.Current.Dispatcher.Invoke(delegate
             {
-                App.Current.Dispatcher.Invoke(delegate
+                if (AutoScroll)
                 {
                     (this.AssociatedObject as ScrollViewer).ScrollToBottom();
-                });
-            }
+                }
+            });
+        
+            
         }
     }
 }

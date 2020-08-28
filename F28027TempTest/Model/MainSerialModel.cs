@@ -31,6 +31,8 @@ namespace F28027TempTest
 
         public StopBits StopBits { get; set; }
 
+        public int ReceiveSplitTimeMs { get; set; } = 100;
+
         public ObservableCollection<SerialLogEntity> SerialLogs { get; private set; } = new ObservableCollection<SerialLogEntity>();
 
 
@@ -74,6 +76,7 @@ namespace F28027TempTest
                 SerialObj.Open();
                 IsConnected = true;
 
+                SerialObj.DataReceived += SerialObj_DataReceived;
 
                 return true;
             }
@@ -83,6 +86,15 @@ namespace F28027TempTest
                 return false;
             }
 
+        }
+
+        private void SerialObj_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            SerialPort sp = (SerialPort)sender;
+            int c = sp.BytesToRead;
+            byte[] indata = new byte[c];
+            sp.Read(indata, 0, c);
+            LogReceiveEvent(indata);
         }
 
         public bool Disconnect()
@@ -100,11 +112,21 @@ namespace F28027TempTest
 
         private void LogTransmitEvent(byte[] bytes)
         {
-            SerialLogs.Add(new SerialLogEntity(DateTime.Now, "Tx", new List<byte>(bytes)));
+            SerialLogs.Add(new SerialLogEntity(DateTime.Now, "TX", new List<byte>(bytes)));
         }
         private void LogReceiveEvent(byte[] bytes)
         {
-            SerialLogs.Add(new SerialLogEntity(DateTime.Now, "Rx", new List<byte>(bytes)));
+            App.Current.Dispatcher.Invoke(delegate
+            {
+                if (SerialLogs.Count > 0 && ReceiveSplitTimeMs != 0 && (DateTime.Now - SerialLogs[SerialLogs.Count - 1].Time).TotalMilliseconds < ReceiveSplitTimeMs)
+                {
+                    SerialLogs[SerialLogs.Count - 1] = new SerialLogEntity(DateTime.Now, "RX", SerialLogs[SerialLogs.Count - 1].Bytes.Concat(bytes).ToList());
+                }
+                else
+                {
+                    SerialLogs.Add(new SerialLogEntity(DateTime.Now, "RX", new List<byte>(bytes)));
+                }
+            });
         }
     }
 }

@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Text.RegularExpressions;
+using System.Windows.Input;
 
 namespace F28027TempTest
 {
@@ -14,5 +16,6 @@ namespace F28027TempTest
         {
             InitializeComponent();
         }
+
     }
 }
