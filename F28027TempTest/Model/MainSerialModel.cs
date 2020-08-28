@@ -31,10 +31,7 @@ namespace F28027TempTest
 
         public StopBits StopBits { get; set; }
 
-        public ObservableCollection<SerialLogEntity> SerialLogs { get; private set; } = new ObservableCollection<SerialLogEntity>
-        {
-            new SerialLogEntity(DateTime.Now, "TEST", ASCIIEncoding.ASCII.GetBytes( "Hello").ToList())
-        };
+        public ObservableCollection<SerialLogEntity> SerialLogs { get; private set; } = new ObservableCollection<SerialLogEntity>();
 
 
         protected MainSerialModel()

@@ -183,10 +183,21 @@ namespace F28027TempTest.ViewModel
         }
         #endregion
 
+        #region ClearTestingLog
+
+        public ICommand ClearTestingLog { get; }
+        private bool CanClearTestingLogExecute(object p) => (msm.SerialLogs.Count >0);
+        private void OnClearTestingLogExecuted(object p)
+        {
+            msm.SerialLogs.Clear();
+        }
+
+        #endregion
+
         #endregion
 
         public MainSerialViewModel()
-        {
+        {            
             SettingsInit();
 
             RefreshComPortsListCommand = new LambdaCommand(OnRefreshComPortsListCommandExecuted, CanRefreshComPortsListCommandExecute);
@@ -194,6 +205,8 @@ namespace F28027TempTest.ViewModel
             ConnectDisconnectSerialCommand = new LambdaCommand(OnConnectDisconnectSerialCommandExecuted, CanConnectDisconnectSerialCommandExecute);
 
             TestingSendSerialCommand = new LambdaCommand(OnTestingSendSerialCommandExecuted, CanTestingSendSerialCommandExecute);
+
+            ClearTestingLog = new LambdaCommand(OnClearTestingLogExecuted, CanClearTestingLogExecute);
         }
 
         private void SettingsInit()
